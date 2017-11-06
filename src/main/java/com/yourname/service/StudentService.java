@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
@@ -25,14 +26,13 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    public PagingObject<StudentModel> getAllStudents(Integer page, Integer size) {
-        log.info("Paging size: " + size + "/Page: " + page);
-        if (size > 500) size = 10;
-        PageRequest pageRequest = new PageRequest(page, size);
+    public PagingObject<StudentModel> getAllStudents(Pageable pageable) {
+        log.info("Paging : " + pageable);
+        if (pageable.getPageSize() > 500) throw new RuntimeException();
 
         PagingObject<StudentModel> rs = new PagingObject<>();
 
-        Page<Student> studentPage = studentRepository.findAll(pageRequest);
+        Page<Student> studentPage = studentRepository.findAll(pageable);
         rs.setTotal(studentPage.getTotalElements());
         rs.setTotalPage(studentPage.getTotalPages());
 
@@ -69,9 +69,6 @@ public class StudentService {
 
     public void delete(Integer id) {
         Student st = studentRepository.findOne(id);
-       /* if(st == null){
-             studentRepository.notFound().build();
-        }*/
         studentRepository.delete(st);
     }
 

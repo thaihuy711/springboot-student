@@ -3,6 +3,7 @@ package com.yourname.controller;
 import com.yourname.domain.Student;
 import com.yourname.model.StudentModel;
 import com.yourname.service.StudentService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,9 +19,8 @@ public class StudentController {
     }
 
     @GetMapping
-    public PagingObject<StudentModel> getAllStudents(@RequestParam(defaultValue = "0") Integer page,
-                                             @RequestParam(defaultValue = "10") Integer size) {
-        return studentService.getAllStudents(page, size);
+    public PagingObject<StudentModel> getAllStudents(Pageable pageable) {
+        return studentService.getAllStudents(pageable);
     }
 
     @PostMapping
