@@ -19,8 +19,10 @@ public class StudentController {
     }
 
     @GetMapping
-    public PagingObject<StudentModel> getAllStudents(Pageable pageable) {
-        return studentService.getAllStudents(pageable);
+    public PagingObject<StudentModel> getAllStudents(Pageable pageable,
+                                                     @RequestParam String name,
+                                                     @RequestParam String course) {
+        return studentService.getAllStudents(pageable, name, course);
     }
 
     @PostMapping
