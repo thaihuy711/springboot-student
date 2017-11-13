@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
 import javax.persistence.criteria.Predicate;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -43,15 +45,15 @@ public class StudentService {
             Predicate namePredicate = cb.like(root.get(Student_.name), "%" + name + "%");
             Predicate coursePredicate = cb.like(root.get(Student_.course), "%" + course + "%");
             Predicate idPredicate = cb.equal(root.get(Student_.id), 1);
-            /*predicates.add(cb.like(root.get(Student_.name), "%" + name + "%"));
+            predicates.add(cb.like(root.get(Student_.name), "%" + name + "%"));
             if(StringUtils.hasText(course)) {
                 predicates.add(cb.like(root.get(Student_.course), "%" + course + "%"));
             }
-            return cb.or(predicates.toArray(new Predicate[predicates.size()]));*/
-            return cb.and(
-              cb.or(namePredicate, coursePredicate),
-              idPredicate
-            );
+            return cb.or(predicates.toArray(new Predicate[predicates.size()]));
+//            return cb.and(
+//              cb.or(namePredicate, coursePredicate),
+//              idPredicate
+//            );
         }, pageable);
 
         rs.setTotal(studentPage.getTotalElements());
