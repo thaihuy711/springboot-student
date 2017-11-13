@@ -84,7 +84,6 @@ public class StudentService {
         std.setName(form.getName());
         std.setCourse(form.getCourse());
         if (std.getSubjects() != null) std.getSubjects().clear();
-        std.setSubjects(new HashSet<>());
         for (SubjectsForm subjectsForm : form.getSubjectsForms())
         {
             Subjects subjects = new Subjects();
