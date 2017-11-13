@@ -15,7 +15,7 @@ public class Subjects {
 
     private String name_subjects;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "student_id")
     private Student student;
 

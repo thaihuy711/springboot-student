@@ -6,6 +6,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "students")
@@ -18,7 +19,7 @@ public class Student {
     private String course;
 
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "student", cascade = {CascadeType.ALL}, orphanRemoval = true)
     @JsonIgnore
     private Set<Subjects> subjects;
 
@@ -27,7 +28,7 @@ public class Student {
         st.setId(id);
         st.setName(name);
         st.setCourse(course);
-        //st.setSubjects(getSubjects().stream().map(Subjects::toSubjectsForm).collect(Collectors.toSet()));
+        st.setSubjects(getSubjects().stream().map(Subjects::toSubjectsForm).collect(Collectors.toSet()));
         return st;
     }
 

@@ -6,6 +6,7 @@ import com.yourname.service.StudentService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @RestController
@@ -23,6 +24,12 @@ public class StudentController {
                                                      @RequestParam String name,
                                                      @RequestParam String course) {
         return studentService.getAllStudents(pageable, name, course);
+    }
+
+    @GetMapping("/{id}")
+    public StudentModel getStudent(@PathVariable Integer id)
+    {
+        return studentService.getStudent(id);
     }
 
     @PostMapping

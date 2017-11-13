@@ -3,8 +3,10 @@ package com.yourname.service;
 
 import com.yourname.controller.PagingObject;
 import com.yourname.controller.StudentForm;
+import com.yourname.controller.SubjectsForm;
 import com.yourname.domain.Student;
 import com.yourname.domain.Student_;
+import com.yourname.domain.Subjects;
 import com.yourname.model.StudentModel;
 import com.yourname.repository.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +15,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import javax.persistence.criteria.Predicate;
+import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +34,7 @@ public class StudentService {
 
     public PagingObject<StudentModel> getAllStudents(Pageable pageable, String name, String course) {
         log.info("Paging : " + pageable);
-        if (pageable.getPageSize() > 500) throw new RuntimeException();
+        if (pageable.getPageSize() > 500) throw new RuntimeException("Page size too big");
 
         PagingObject<StudentModel> rs = new PagingObject<>();
 
@@ -76,13 +81,31 @@ public class StudentService {
         Student std = studentRepository.findOne(id);
         std.setName(form.getName());
         std.setCourse(form.getCourse());
-        studentRepository.save(std);
+        if (std.getSubjects() != null) std.getSubjects().clear();
+        std.setSubjects(new HashSet<>());
+        for (SubjectsForm subjectsForm : form.getSubjectsForms())
+        {
+            Subjects subjects = new Subjects();
+            subjects.setStudent(std);
+            subjects.setName_subjects(subjectsForm.getName_subjects());
+            System.out.println(subjects.getName_subjects());
+            std.getSubjects().add(subjects);
+        }
 
+        System.out.println(std.getSubjects().size());
+
+        studentRepository.save(std);
     }
 
     public void delete(Integer id) {
         Student st = studentRepository.findOne(id);
         studentRepository.delete(st);
+    }
+
+    public StudentModel getStudent(Integer id)
+    {
+        StudentModel studentModel = studentRepository.getOne(id).toModel();
+        return studentModel;
     }
 
 }
