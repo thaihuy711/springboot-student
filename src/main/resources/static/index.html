@@ -1,0 +1,35 @@
+<!doctype html>
+<html ng-app="todoApp">
+<head>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="components/main.css">
+</head>
+<body>
+<div class="container">
+    <div class="page-header">
+        Students Management
+    </div>
+    <ul class="list-inline">
+        <li ui-sref-active="active"><a ui-sref="main">Students Management</a></li>
+        <li ui-sref-active="active"><a ui-sref="form">Form</a></li>
+        <li ui-sref-active="active"><a ui-sref="delete">Delete</a></li>
+    </ul>
+</div>
+<div class="container">
+    <ui-view></ui-view>
+</div>
+<footer>
+    This is page footer
+</footer>
+
+
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="node_modules/angular/angular.min.js"></script>
+<script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+<script src="node_modules/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
+<script src="components/main.js"></script>
+<script src="components/main.config.js"></script>
+<script src="components/student.service.js"></script>
+<script src="components/list/list.controller.js"></script>
+</body>
+</html>

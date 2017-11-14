@@ -10,7 +10,7 @@ import java.math.BigInteger;
 import java.util.List;
 
 @RestController
-@RequestMapping("/students")
+@RequestMapping(AbstractController.API + "/students")
 public class StudentController {
     private final StudentService studentService;
 
@@ -21,8 +21,8 @@ public class StudentController {
 
     @GetMapping
     public PagingObject<StudentModel> getAllStudents(Pageable pageable,
-                                                     @RequestParam String name,
-                                                     @RequestParam String course) {
+                                                     @RequestParam(required = false, defaultValue = "") String name,
+                                                     @RequestParam(required = false, defaultValue = "") String course) {
         return studentService.getAllStudents(pageable, name, course);
     }
 
