@@ -86,13 +86,17 @@ public class StudentService {
         Student std = studentRepository.findOne(id);
         std.setName(form.getName());
         std.setCourse(form.getCourse());
-        if (std.getSubjects() != null) std.getSubjects().clear();
-        for (SubjectsForm subjectsForm : form.getSubjectsForms()) {
-            Subjects subjects = new Subjects();
-            subjects.setStudent(std);
-            subjects.setName_subjects(subjectsForm.getName_subjects());
-            System.out.println(subjects.getName_subjects());
-            std.getSubjects().add(subjects);
+
+        std.getSubjects().clear();
+
+        if (form.getSubjectsForms() != null) {
+            for (SubjectsForm subjectsForm : form.getSubjectsForms()) {
+                Subjects subjects = new Subjects();
+                subjects.setStudent(std);
+                subjects.setName_subjects(subjectsForm.getName_subjects());
+                System.out.println(subjects.getName_subjects());
+                std.getSubjects().add(subjects);
+            }
         }
 
         System.out.println(std.getSubjects().size());

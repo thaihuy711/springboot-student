@@ -27,8 +27,7 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public StudentModel getStudent(@PathVariable Integer id)
-    {
+    public StudentModel getStudent(@PathVariable Integer id) {
         return studentService.getStudent(id);
     }
 
@@ -37,7 +36,7 @@ public class StudentController {
         return studentService.create(form);
     }
 
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public void update(@PathVariable Integer id, @RequestBody StudentForm form) {
         studentService.update(id, form);
     }
@@ -47,8 +46,4 @@ public class StudentController {
         studentService.delete(id);
     }
 
-    @GetMapping("/dataTest")
-    public void insertDataTest() {
-        studentService.insertDataTest();
-    }
 }

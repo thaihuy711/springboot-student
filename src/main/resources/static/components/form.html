@@ -1,0 +1,17 @@
+<div class="modal-body">
+    <p class="alert alert-danger" ng-if="$ctrl.errorMsg.length">{{$ctrl.errorMsg}}</p>
+    <form name="$ctrl.form" novalidate ng-submit="$ctrl.submit($ctrl.data)">
+        <div class="form-group">
+            <label class="control-label">Name</label>
+            <input type="text" name="name" title="Student Name" ng-model="$ctrl.data.name" class="form-control"
+                   required/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Course</label>
+            <input type="text" name="name" title="Student Course" ng-model="$ctrl.data.course" class="form-control"
+                   required maxlength="20"/>
+        </div>
+        <button class="btn btn-default" type="button" ng-click="$ctrl.dismiss()">Close</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+</div>

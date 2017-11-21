@@ -34,8 +34,8 @@
         <td>{{student.course}}</td>
         <td>
             <div class="btn-group btn-group-sm">
-                <button class="btn-warning btn">Edit</button>
-                <button class="btn-danger btn">Delete</button>
+                <button class="btn-warning btn" ng-click="$ctrl.edit(student)">Edit</button>
+                <button class="btn-danger btn" ng-click="$ctrl.delete(student)">Delete</button>
             </div>
         </td>
     </tr>
