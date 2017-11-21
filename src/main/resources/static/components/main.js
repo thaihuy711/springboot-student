@@ -1,1 +1,4 @@
-var todoApp = angular.module('todoApp',  ['ui.router']);
+(function () {
+    'use strict';
+    var todoApp = angular.module('todoApp', ['ui.router', 'ui.bootstrap', 'angular-loading-bar']);
+})();

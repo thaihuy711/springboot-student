@@ -39,22 +39,24 @@ public class StudentService {
         if (pageable.getPageSize() > 500) throw new RuntimeException("Page size too big");
 
         PagingObject<StudentModel> rs = new PagingObject<>();
+        Page<Student> studentPage;
+        if (StringUtils.hasText(name) || StringUtils.hasText(course)) {
+            studentPage = studentRepository.findAll((root, query, cb) -> {
+                List<Predicate> predicates = new ArrayList<>();
+                if (StringUtils.hasText(name)) {
+                    predicates.add(cb.like(root.get(Student_.name), "%" + name + "%"));
+                }
+                if (StringUtils.hasText(course)) {
+                    predicates.add(cb.like(root.get(Student_.course), "%" + course + "%"));
+                }
 
-        Page<Student> studentPage = studentRepository.findAll((root, query, cb) -> {
-            List<Predicate> predicates = new ArrayList<>();
-            Predicate namePredicate = cb.like(root.get(Student_.name), "%" + name + "%");
-            Predicate coursePredicate = cb.like(root.get(Student_.course), "%" + course + "%");
-            Predicate idPredicate = cb.equal(root.get(Student_.id), 1);
-            predicates.add(cb.like(root.get(Student_.name), "%" + name + "%"));
-            if(StringUtils.hasText(course)) {
-                predicates.add(cb.like(root.get(Student_.course), "%" + course + "%"));
-            }
-            return cb.or(predicates.toArray(new Predicate[predicates.size()]));
-//            return cb.and(
-//              cb.or(namePredicate, coursePredicate),
-//              idPredicate
-//            );
-        }, pageable);
+                return cb.or(predicates.toArray(new Predicate[predicates.size()]));
+
+            }, pageable);
+        } else {
+            studentPage = studentRepository.findAll(pageable);
+        }
+
 
         rs.setTotal(studentPage.getTotalElements());
         rs.setTotalPage(studentPage.getTotalPages());
@@ -62,6 +64,7 @@ public class StudentService {
 
         return rs;
     }
+
     public Student create(StudentForm form) {
         log.error("Create from : " + form);
         Student s = new Student();
@@ -84,8 +87,7 @@ public class StudentService {
         std.setName(form.getName());
         std.setCourse(form.getCourse());
         if (std.getSubjects() != null) std.getSubjects().clear();
-        for (SubjectsForm subjectsForm : form.getSubjectsForms())
-        {
+        for (SubjectsForm subjectsForm : form.getSubjectsForms()) {
             Subjects subjects = new Subjects();
             subjects.setStudent(std);
             subjects.setName_subjects(subjectsForm.getName_subjects());
@@ -103,10 +105,8 @@ public class StudentService {
         studentRepository.delete(st);
     }
 
-    public StudentModel getStudent(Integer id)
-    {
-        StudentModel studentModel = studentRepository.getOne(id).toModel();
-        return studentModel;
+    public StudentModel getStudent(Integer id) {
+        return studentRepository.getOne(id).toModel();
     }
 
 }

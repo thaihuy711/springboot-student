@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface StudentRepository
         extends JpaRepository<Student, Integer>,
-        JpaSpecificationExecutor<Student> {
-        Page<Student> findByNameLikeOrCourseLike(String name, String course, Pageable pageable);
+            JpaSpecificationExecutor<Student> {
+//        Page<Student> findByNameLikeOrCourseLike(String name, String course, Pageable pageable);
     Page<Student> findByNameLike(String name,  Pageable pageable);
 }
