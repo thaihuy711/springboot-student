@@ -24,6 +24,7 @@
             template: '<h3>Delete student!</h3>'
         };
 
+
         $stateProvider.state(mainState);
         $stateProvider.state(formState);
         $stateProvider.state(deleteStudent);

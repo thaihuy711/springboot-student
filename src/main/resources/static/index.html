@@ -1,41 +1,52 @@
 <!doctype html>
 <html ng-app="todoApp">
 <head>
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
+          type="text/css"/>
+
+    <link href="node_modules/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="node_modules/angular-loading-bar/src/loading-bar.css">
     <link rel="stylesheet" href="node_modules/sweetalert/lib/sweet-alert.css">
+    <link rel="stylesheet" href="node_modules/simple-line-icons/css/simple-line-icons.css">
+
+    <link href="assets/css/components.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/plugins.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/layout.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/default.css" rel="stylesheet" type="text/css"/>
 
     <link rel="stylesheet" href="components/main.css">
 </head>
-<body>
-<div class="container">
-    <div class="page-header">
-        Students Management
+<body class="page-header-fixed page-content-white">
+    <div class="page-wrapper">
+        <cit-header></cit-header>
+        <div class="clear-fix"></div>
+        <div class="page-container">
+            <cit-sidebar></cit-sidebar>
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <ui-view></ui-view>
+                </div>
+            </div>
+        </div>
     </div>
-    <ul class="list-inline">
-        <li ui-sref-active="active"><a ui-sref="main">Students Management</a></li>
-        <li ui-sref-active="active"><a ui-sref="form">Form</a></li>
-        <li ui-sref-active="active"><a ui-sref="delete">Delete</a></li>
-    </ul>
-</div>
-<div class="container">
-    <ui-view></ui-view>
-</div>
 
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <script src="node_modules/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
+    <script src="node_modules/angular-loading-bar/src/loading-bar.js"></script>
+    <script src="node_modules/sweetalert/lib/sweet-alert.min.js"></script>
+    <script src="node_modules/angular-sweetalert/SweetAlert.min.js"></script>
 
-<script src="node_modules/jquery/dist/jquery.min.js"></script>
-<script src="node_modules/angular/angular.min.js"></script>
-<script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
-<script src="node_modules/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
-<script src="node_modules/angular-loading-bar/src/loading-bar.js"></script>
-<script src="node_modules/sweetalert/lib/sweet-alert.min.js"></script>
-<script src="node_modules/angular-sweetalert/SweetAlert.min.js"></script>
-<!-- Our javascript -->
-
-<script src="components/main.js"></script>
-<script src="components/main.config.js"></script>
-<script src="components/student.service.js"></script>
-<script src="components/list/list.controller.js"></script>
-<script src="components/form.controller.js"></script>
+    <script src="components/main.js"></script>
+    <script src="components/main.config.js"></script>
+    <script src="components/student.service.js"></script>
+    <script src="components/list/list.controller.js"></script>
+    <script src="components/form.controller.js"></script>
+    <script src="components/layout/header.directive.js"></script>
+    <script src="components/layout/sidebar.directive.js"></script>
 </body>
 </html>

@@ -32,17 +32,17 @@ public class Student {
         return st;
     }
 
-    @Override
-    public String toString() {
-        String result = String.format("Student[id=%d, name='%s', course='%s']%n",
-                id, name, course);
-        if (subjects != null) {
-            for (Subjects subject : subjects) {
-                result += String.format(
-                        "Subjects[id=%d, name='%s']%n",
-                        subject.getId(), subject.getName_subjects());
-            }
-        }
-        return result;
-    }
+//    @Override
+//    public String toString() {
+//        String result = String.format("Student[id=%d, name='%s', course='%s']%n",
+//                id, name, course);
+//        if (subjects != null) {
+//            for (Subjects subject : subjects) {
+//                result += String.format(
+//                        "Subjects[id=%d, name='%s']%n",
+//                        subject.getId(), subject.getName_subjects());
+//            }
+//        }
+//        return result;
+//    }
 }

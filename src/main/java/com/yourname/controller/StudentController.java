@@ -10,7 +10,7 @@ import java.math.BigInteger;
 import java.util.List;
 
 @RestController
-@RequestMapping(AbstractController.API + "/students")
+@RequestMapping(AbstractController.API+"/students")
 public class StudentController {
     private final StudentService studentService;
 
